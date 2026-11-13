@@ -6,3 +6,4 @@ data/
 models/
 mlruns/
 Makefile
+.github/workflows/mlops.yml
