@@ -5,3 +5,4 @@ mlflow.db*
 data/
 models/
 mlruns/
+Makefile
