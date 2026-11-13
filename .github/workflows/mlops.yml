@@ -1,8 +1,6 @@
 name: MLOps pipeline
 on:
-  push: {branches: [main]}
-  pull_request:
-  schedule: [{cron: "0 3 * * 1"}]   # ré-entraînement hebdomadaire
+  workflow_dispatch:
 jobs:
   train-test-build:
     runs-on: ubuntu-latest
