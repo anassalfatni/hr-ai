@@ -1,0 +1,13 @@
+pandas>=2.0
+numpy
+scikit-learn>=1.4
+joblib
+pypdf>=5.0
+reportlab>=4.0
+flask>=3.0
+gunicorn
+streamlit>=1.30
+pytest
+sentence-transformers>=3.0
+python-dotenv>=1.0
+mlflow>=2.12,<4

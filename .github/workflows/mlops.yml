@@ -1,0 +1,21 @@
+name: MLOps pipeline
+on:
+  push: {branches: [main]}
+  pull_request:
+  schedule: [{cron: "0 3 * * 1"}]   # ré-entraînement hebdomadaire
+jobs:
+  train-test-build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: "3.11", cache: pip}
+      - run: pip install -r requirements.txt
+      - run: python scripts/make_synthetic_salary.py
+      - name: Train + quality gate (échoue si F1/R2 sous le seuil)
+        run: python -m src.train
+      - run: pytest -q
+      - uses: actions/upload-artifact@v4
+        with: {name: models-and-metrics, path: models/}
+      - name: Build image Docker
+        run: docker build -t hr-ai:${{ github.sha }} .
